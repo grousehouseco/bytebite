@@ -1,4 +1,7 @@
 class PantryController {
+    getFood(req, res){
+        return res.send("food getted")
+    }
     addFood(req, res) {
         return res.send("added")
     }

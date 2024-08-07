@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    ToolbarComponent
-  ],
+  imports: [RouterOutlet],
   template: `
-    <app-toolbar/>
+    <h1>Welcome to {{title}}!</h1>
 
     <router-outlet />
   `,
   styles: [],
 })
 export class AppComponent {
-  title = 'bytebite';
+  title = 'ui';
 }
