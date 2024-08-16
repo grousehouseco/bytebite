@@ -1,0 +1,12 @@
+.cam-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 0;
+}
+.camera-button {
+  background: #ffffff;
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 55%;
+}

@@ -1,0 +1,12 @@
+.img-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 0;
+}
+.img-taken {
+  width: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
