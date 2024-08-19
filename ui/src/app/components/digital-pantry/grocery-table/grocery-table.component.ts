@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { GroceryItem } from '../../models/grocery-item';
+import { GroceryItem } from '../../../models/grocery-item';
 
 @Component({
   selector: 'app-grocery-table',

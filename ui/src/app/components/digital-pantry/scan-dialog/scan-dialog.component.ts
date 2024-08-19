@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CameraComponent } from "../camera/camera.component";
+import { CameraComponent } from "../../shared/camera/camera.component";
 import { WebcamImage } from 'ngx-webcam';
 import { NgIf } from '@angular/common';
 

@@ -7,16 +7,17 @@ import { MatCardModule } from '@angular/material/card';
 import { ScanDialogComponent } from '../scan-dialog/scan-dialog.component';
 import { ExtractTextService } from '../../../services/extract-text.service';
 import { NgFor, NgIf } from '@angular/common';
-import { GroceryTableComponent } from "../../grocery-table/grocery-table.component";
+import { GroceryTableComponent } from "../grocery-table/grocery-table.component";
 import { GroceryItem } from '../../../models/grocery-item';
+import { AddComponent } from "../add/add.component";
 
 @Component({
   selector: 'app-dp-root',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatCardModule, NgIf, NgFor, GroceryTableComponent],
+  imports: [MatButtonModule, MatIconModule, MatCardModule, NgIf, NgFor, GroceryTableComponent, AddComponent],
   template: `
   <div class="dp-container">
-    <button mat-fab extended class="pantry-button add" (click)="openAddDialog()">
+    <!-- <button mat-fab extended class="pantry-button add" (click)="openAddDialog()">
       <mat-icon class="material-symbols-rounded">add</mat-icon>
       Add groceries
     </button>
@@ -24,7 +25,8 @@ import { GroceryItem } from '../../../models/grocery-item';
       <mat-icon class="material-symbols-rounded">remove</mat-icon>
       Remove groceries
     </button>
-    <app-grocery-table *ngIf="groceryData" [data]="groceryData"></app-grocery-table>
+    <app-grocery-table *ngIf="groceryData" [data]="groceryData"></app-grocery-table> -->
+    <app-add></app-add>
   </div>
   `,
   styles: `

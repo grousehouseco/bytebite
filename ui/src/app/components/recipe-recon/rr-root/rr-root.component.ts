@@ -5,9 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <p>
-      rr-root works!
-    </p>
   `,
   styles: ``
 })
