@@ -1,0 +1,6 @@
+@digital_pantry_HostAddress = http://localhost:5241
+
+GET {{digital_pantry_HostAddress}}/users/
+Accept: application/json
+
+###
