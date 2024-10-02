@@ -13,6 +13,7 @@ builder.Services.AddMediatR(config =>
     config.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
 builder.Services.AddScoped<SieveProcessor>();
+builder.Services.AddHttpClient();
 BsonClassMap.RegisterClassMap<User>();
 BsonClassMap.RegisterClassMap<Inventory>();
 BsonClassMap.RegisterClassMap<Household>();
@@ -31,5 +32,6 @@ var app = builder.Build();
 //app.MapControllers();
 UserEndpoints.Map(app);
 HouseholdEndpoints.Map(app);
+GroceryEndpoints.Map(app);
 
 app.Run();
