@@ -1,5 +1,9 @@
-*/obj
-*/bin
+obj/
+bin/
 .idea
 .DS_Store
 **/*.user
+**/node_modules/
+**/.env
+**/.angular/cache/
+**/.vscode/

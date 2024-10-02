@@ -1,0 +1,49 @@
+@import '../../../../styles/styles.scss';
+
+.toolbar {
+  height: 10%;
+}
+.logo-button {
+  margin: 8px;
+  width: 52px;
+  height: 52px;
+  background: #adfffe;
+  border: 1px solid #002020;
+}
+.logo-button:hover{
+  margin: 8px;
+  width: 52px;
+  height: 52px;
+  background: #4cdada;
+  border: 1px solid #002020;
+}
+.logo {
+  width: 32px;
+  height: 32px;
+}
+.byte {
+  margin-left: 12px;
+  font-family: "Tiny5", "sans-serif";
+  color: #1ebebe;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.bite {
+  font-family: "Bungee", "sans-serif";
+  font-size: 30px;
+  color: #283d57;
+  text-transform: uppercase;
+}
+.toolbar-button-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+#spacer {
+  flex: 1 1 auto;
+}
+#toolbar-action {
+  height: 52px;
+  width: 52px;
+  margin: 4px;
+}
