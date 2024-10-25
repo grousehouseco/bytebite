@@ -10,6 +10,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { GroceryTableComponent } from "../grocery-table/grocery-table.component";
 import { GroceryItem } from '../../../models/grocery-item';
 import { AddComponent } from "../add/add.component";
+import { GroceryService } from '../../../services/grocery.service';
 
 @Component({
   selector: 'app-dp-root',
@@ -17,7 +18,7 @@ import { AddComponent } from "../add/add.component";
   imports: [MatButtonModule, MatIconModule, MatCardModule, NgIf, NgFor, GroceryTableComponent, AddComponent],
   template: `
   <div class="dp-container">
-    <!-- <button mat-fab extended class="pantry-button add" (click)="openAddDialog()">
+    <button mat-fab extended class="pantry-button add" (click)="openAddDialog()">
       <mat-icon class="material-symbols-rounded">add</mat-icon>
       Add groceries
     </button>
@@ -25,8 +26,8 @@ import { AddComponent } from "../add/add.component";
       <mat-icon class="material-symbols-rounded">remove</mat-icon>
       Remove groceries
     </button>
-    <app-grocery-table *ngIf="groceryData" [data]="groceryData"></app-grocery-table> -->
-    <app-add></app-add>
+    <app-grocery-table *ngIf="groceryData" [data]="groceryData"></app-grocery-table>
+    <!-- <app-add></app-add> -->
   </div>
   `,
   styles: `
@@ -60,7 +61,7 @@ export class DpRootComponent {
   addAction: string = "";
   groceryData: GroceryItem[] | undefined;
 
-  constructor(private extractService: ExtractTextService){}
+  constructor(private extractService: ExtractTextService, private groceryService: GroceryService){}
 
   openAddDialog() {
     const dialogRef = this.dialog.open(AddDialogComponent, {
@@ -86,13 +87,11 @@ export class DpRootComponent {
       if (result !== undefined) {
         this.extractService.readUpcFromImage(result).then((res)=>{
           if(res !== undefined){
-            console.log(res)
-            this.extractService.getGroceryData(res).then(grocRes => 
+            this.groceryService.getGroceryData(res).then(grocRes => 
             {
               console.log(grocRes);
-              this.groceryData = grocRes.data.products;
+              this.groceryData = [grocRes.data];
             })
-            //this.extractService.getMock(res).then(grocRes => this.groceryData = grocRes);
           }
         })
       }

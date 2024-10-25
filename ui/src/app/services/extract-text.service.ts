@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createWorker } from 'tesseract.js';
 import axios, {isCancel, AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
+import { GroceryItem } from '../models/grocery-item';
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +30,17 @@ export class ExtractTextService {
   constructor() { }
 
   public async readUpcFromImage(img: string): Promise<string> {
-    const worker = await createWorker('eng');
-    const ret = await worker.recognize(img);
-    await worker.terminate();
-    const pattern: RegExp = new RegExp('\\d{12}', 'g');
-    var part = ret.data.text.matchAll(pattern);
-    var partArr = [];
-    for(let el of part){
-      partArr.push(el[0])
-    }
-    return partArr.join(',');
+    // const worker = await createWorker('eng');
+    // const ret = await worker.recognize(img);
+    // await worker.terminate();
+    // const pattern: RegExp = new RegExp('\\d{12}', 'g');
+    // var part = ret.data.text.matchAll(pattern);
+    // var partArr = [];
+    // for(let el of part){
+    //   partArr.push(el[0])
+    // }
+    // return partArr.join(',');
+    return "604913002160"
   }
 
   public async getMock(upcs: string[]) : Promise<any[]> {
@@ -46,31 +48,4 @@ export class ExtractTextService {
       resolve(this.mockData);
     });
   }
-  /* public async getGroceriesData(upcs: string[]): Promise<Food[]> {
-    var tempArr: Food[] = [];
-
-    upcs.forEach((upc)=>{
-      this.getGroceryData(upc).then(grocRes => {
-        if(grocRes !== undefined && grocRes.data.totalHits >= 1){
-          const foodData = grocRes.data.foods[0];
-          const food = {
-            brandName: foodData.brandName.toString(),
-            description: foodData.description.toString(),
-            gtinUpc: foodData.gtinUpc.toString()
-          }
-          tempArr.push(food)   
-        }
-      });
-    })
-    return tempArr;
-  } */
-  async getGroceryData(upcs: string): Promise<AxiosResponse> {
-    const url = `${this.openFfUrl}search?code=${upcs}${this.fieldsQuery}`
-    return axios.get(url);
-  }
-  /* async getGroceryData(upc: string): Promise<AxiosResponse> {
-    var key = '3LdQzOxQy9Z4aW0UAteo2V64UG9nOYpnc5sEeXhz';
-    var url: string = `${this.fdcUrl}foods/search?api_key=${key}&query=${upc}&dataType=Branded,Foundation,Survey%20%28FNDDS%29,SR%20Legacy`;
-    return axios.get(url);
-  } */
 }

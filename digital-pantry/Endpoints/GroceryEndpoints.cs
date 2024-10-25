@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using digital_pantry.Models;
 using digital_pantry.Repository;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace digital_pantry.Endpoints;
 
@@ -16,8 +17,9 @@ public static class GroceryEndpoints
 
     public static IResult GetGroceryItem([FromServices]GroceryRepository repo, [FromServices]HttpClient client, [FromQuery]string code)
     {
-        var res = repo.GetByNamedParamAsync("UpcCode", code).Result;
-        if (!(res?.Count < 1) && res?[0] is not null) return Results.Ok(res![0]);
+        if (string.IsNullOrEmpty(code)) return Results.BadRequest();
+        var res = repo.GetByNamedParamAsync("Id", code).Result;
+        if (res?.Count > 0) return Results.Ok(res[0]);
         // call openApi to get the entry, the add it to db
         var link = $"https://world.openfoodfacts.org/api/v2/search?code={code}";
         var offResult = client.GetAsync(link).Result;
@@ -25,8 +27,9 @@ public static class GroceryEndpoints
         var str = offResult.Content.ReadAsStringAsync().Result;
         var resp = JsonSerializer.Deserialize<OpenFoodResponse>(str);
         if(resp?.Count < 1) return Results.NotFound();
-        var addRes = repo.PostAsync(resp!.Products[0]).Result;
-        return addRes ? Results.Created($"/groceries/{code}", resp!.Products[0]) : Results.NotFound();
+        var item = resp!.Products[0];
+        var addRes = repo.PostAsync(item).Result;
+        return addRes ? Results.Created($"/groceries/{code}", item) : Results.NotFound();
     }
 }
 

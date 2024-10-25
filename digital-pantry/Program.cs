@@ -5,7 +5,14 @@ using MongoDB.Bson.Serialization;
 using Sieve.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "localhost",
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:4200");
+        });
+});
 builder.Configuration.AddEnvironmentVariables();
 if(builder.Environment.IsDevelopment()) builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddMediatR(config =>
@@ -26,7 +33,7 @@ builder.Services.AddSingleton<GroceryRepository>();
 
 
 var app = builder.Build();
-
+app.UseCors("localhost");
 //app.UseAuthorization();
 
 //app.MapControllers();
