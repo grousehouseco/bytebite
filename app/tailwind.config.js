@@ -9,7 +9,7 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   daisyui: {
-    themes: ["sunset"],
+    themes: ["emerald"],
   },
   theme: {
     extend: {},
