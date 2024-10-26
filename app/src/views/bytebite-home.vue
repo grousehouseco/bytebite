@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  Home
+  <p class="prose prose-xl">Home</p>
 </template>

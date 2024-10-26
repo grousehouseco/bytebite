@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  Recipe Recon
+  <p class="prose prose-xl">Recipe Recon</p>
 </template>

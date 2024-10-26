@@ -1,36 +1,46 @@
 <script setup>
     import { ref } from 'vue'
     const menuItems = ref([
-        {id: "0", tooltip: "ByteBite Home", icon: "home", href: "/", text: "", children: []},
-        {id: "1", tooltip: "Groceries", icon: "nutrition", href: "/digitalpantry", text: "", children: [
-            {id: "5", tooltip: "Photograph Receipt", icon: "photo_camera", text: "Photograph Receipt", href: "/digitalpantry/scan-receipt"},
-            {id: "6", tooltip: "Scan Barcodes", icon: "barcode_scanner", text: "Scan Barcodes", href: "/digitalpantry/scan-barcodes"},
-            {id: "7", tooltip: "Enter UPCs", icon: "input", text: "Enter UPCs", href: "/digitalpantry/add-groceries"}
+        {id: "0", tooltip: "Home", icon: "home", href: 'home', text: ""},
+        {id: "1", tooltip: "Pantry", icon: "kitchen", href: 'pantry', text: "", children: [
+            {id: "5", icon: "add", text: "Add", href: 'addGroceries'},
+            {id: "6", icon: "remove", text: "Remove", href: 'removeGroceries'}
         ]},
-        {id: "2", tooltip: "Recipes", icon: "menu_book", href: "/reciperecon", text: "", children: []},
-        {id: "3", tooltip: "Cook", icon: "skillet", href: "/", text: "", children: []},
-        {id: "4", tooltip: "Household", icon: "diversity_4", href: "/", text: "", children: []}
+        {id: "2", tooltip: "Recipes", icon: "menu_book", href: 'recipeRecon', text: ""},
+        {id: "3", tooltip: "Cook", icon: "skillet", href: 'cook', text: ""},
+        {id: "4", tooltip: "Household", icon: "diversity_4", href: 'household', text: ""}
     ])
+    let openButtonId = ref(-1)
+    function menuItemClick(id, parentId = -1){
+        if(parentId === -1){
+            openButtonId.value = id === openButtonId.value ? -1 : id
+        }
+    }
 </script>
 <template>
-    <ul class="h-screen menu bg-base-200 flex flex-col justify-center">
-        <li v-for="item in menuItems" :key="item.id" class="tooltip tooltip-right" :data-tip="item.tooltip">
-            <details>
-                <summary>
-                    <RouterLink :to="item.href" exact-active-class="active" class="flex flex-row gap-1">
-                        <span class="material-symbols-rounded mx-auto">{{ item.icon }}</span>
-                        <p class="prose prose-sm">{{ item.tooltip }}</p>
-                    </RouterLink>
-                </summary>
-                <ul v-if="item.children.length > 0">
+    <div class="flex flex-col">
+        <div class="size-24 mx-auto mt-4">
+            <div class="size-20 p-3 mx-auto rounded-full border border-solid border-primary-content bg-primary hover:border-accent-content hover:bg-accent">
+                <img src="../../assets/chef.svg" class="size-full mx-auto"/>
+            </div>
+        </div>
+        <ul class="menu menu-sm bg-base-200 w-fit max-w-sm text-md">
+            <li v-for="item in menuItems" :key="item.id">
+                <RouterLink :to="{ name: item.href }" exact-active-class="active" 
+                @click="menuItemClick(item.id)">
+                    <span class="material-symbols-rounded mx-auto">{{ item.icon }}</span>
+                    <p class="font-bold text-lg">{{ item.tooltip }}</p>
+                </RouterLink>
+                <ul v-if="openButtonId === item.id">
                     <li v-for="child in item.children" :key="child.id">
-                        <RouterLink :to="child.href" exact-active-class="active" class=" flex flex-row gap-1">
+                        <RouterLink :to="{ name: child.href }" exact-active-class="active"
+                        @click="menuItemClick(child.id, item.id)">
                             <span class="material-symbols-rounded mx-auto">{{ child.icon }}</span>
-                            <p class="prose prose-sm">{{ child.text }}</p>
+                            <p class="text-lg">{{ child.text }}</p>
                         </RouterLink>
                     </li>
                 </ul>
-            </details>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 </template>
