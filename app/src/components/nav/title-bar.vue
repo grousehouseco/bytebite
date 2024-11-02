@@ -1,29 +1,28 @@
 <script setup>
-  import { useRoute } from 'vue-router'
-  const route = useRoute()
+  // import { useRoute, useRouter } from 'vue-router'
+  // const route = useRoute()
+  // const router = useRouter()
 </script>
 <template>
-  <div class="navbar bg-base-200 gap-1">
-    <div class="ml-2 dropdown dropdown-start">
-      <div class="flex-none">
-        <button class="btn btn-ghost btn-circle" role="button">
-          <span class="material-symbols-rounded">menu</span>
-        </button>
-        <ul class="menu bg-base-200 rounded-box w-56 dropdown-content mt-2">
-          <li><RouterLink to="/">Home</RouterLink></li>
-          <li><RouterLink to="/digitalpantry">Digital Pantry</RouterLink></li>
-          <li><RouterLink to="/reciperecon">Recipe Recon</RouterLink></li>
-        </ul>
-      </div>
+  <div class="navbar bg-base-200 gap-1 h-24">
+    <div class="ml-4 breadcrumbs font-bold">
+      <ul>
+        <li><a>Home</a></li>
+        <li><a>Documents</a></li>
+        <li>Add Document</li>
+      </ul>
     </div>
-    
-    <div class="flex-1">
-      <h1 class="prose prose-xl">{{ route.name }}</h1>
-    </div>
-    <div class="flex-none">
-      <button class="btn btn-square btn-ghost">
-        <span class="material-symbols-rounded">more_vert</span>
-      </button>
-    </div>
+    <div class="grow"></div>
+    <details class="dropdown dropdown-end">
+      <summary class="avatar" role="button">
+        <div class="w-12 rounded-xl">
+          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+      </summary>
+      <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+      </ul>
+    </details>
   </div>
 </template>

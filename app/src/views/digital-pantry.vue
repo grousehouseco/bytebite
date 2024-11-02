@@ -1,7 +1,7 @@
 <script setup>
-
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  Digital Pantry
+  <RouterView/>
 </template>
