@@ -19,13 +19,14 @@ public static class UserEndpoints
 
     public static IResult GetUsers([FromServices] UserRepository repo, string pageCount = "2", string pageSize = "10", string propertyName = "", string? propertyValue = "")
     {
-        return string.IsNullOrEmpty(propertyName) || string.IsNullOrEmpty(propertyValue)
-            ? Results.Ok(repo.GetAsync().Result)
-            : Results.Ok(repo.GetByNamedParamAsync(propertyName, propertyValue, pageSize:pageSize, pageCount:pageCount).Result);
+        var res= string.IsNullOrEmpty(propertyName) || string.IsNullOrEmpty(propertyValue)
+            ? repo.GetAsync().Result
+            : repo.GetByNamedParamAsync(propertyName, propertyValue, pageSize:pageSize, pageCount:pageCount).Result;
+        return Results.Ok(res);
     }
 
     public static IResult UpsertUser([FromServices] UserRepository repo, [FromServices]IMediator mediator, [FromBody]User user)
-    {
+    { 
         var existingUsers = repo.GetByNamedParamAsync("Email", user.Email).Result;
         if (existingUsers?.Count < 1 || existingUsers?[0] is null)
         {

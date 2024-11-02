@@ -14,8 +14,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "Mongo__Connection": ""
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

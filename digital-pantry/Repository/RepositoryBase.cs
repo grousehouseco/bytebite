@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using digital_pantry.Models;
@@ -34,7 +35,7 @@ public class RepositoryBase<T> where T : class
     public async Task<List<T>?> GetByNamedParamAsync(string param, string? value, bool doSort = false, string? sortParam = null, string sortMethod = "ascending", string pageCount = "2", string pageSize = "10")
     {
         var collection = GetCollection();
-        if (string.IsNullOrEmpty(param) || typeof(T).GetProperty(param) is null) return null;
+        if (string.IsNullOrEmpty(param) || typeof(T).GetProperty(param, BindingFlags.IgnoreCase |  BindingFlags.Public | BindingFlags.Instance) is null) return null;
         if (!int.TryParse(pageCount, out var count) || !int.TryParse(pageSize, out var size)) return null;
         var filter = Builders<T>.Filter.Eq(param, value);
         if (!doSort || string.IsNullOrEmpty(sortParam))
