@@ -1,17 +1,30 @@
 <script setup>
-  import { RouterView } from 'vue-router'
-  import TitleBar from './components/nav/title-bar.vue';
-  import LeftNav from './components/nav/left-nav.vue';
+  import { RouterView, useRouter } from 'vue-router'
+  import { useAuth0 } from '@auth0/auth0-vue';
+  import { watch, inject, ref } from 'vue';
+  const { isAuthenticated, loginWithRedirect, user } = useAuth0()
+  const userService = inject('userService')
+  const router = useRouter()
+
+  const userId = ref('')
+  watch(isAuthenticated, (cur)=>{
+    if(!cur){
+      loginWithRedirect()
+    }
+  })
+  watch(user, (newUser) => {
+    if (newUser && userService) {
+      userService.getUser(newUser.email).then(res => {
+        userId.value = res[0].id
+        router.push(`/${res[0].id}`)
+      })
+    } else {
+      // User has logged out
+      router.push('/login')
+    }
+  });
 </script>
 
 <template>
-  <div class="w-full h-screen flex flex-row bg-base-200">
-    <LeftNav/>
-    <div class="w-full h-screen flex pb-8 pr-8 flex-col">
-      <TitleBar />
-      <div class="card size-full bg-base-100 shadow-md">
-        <RouterView class="card-body"/>
-      </div>
-    </div>
-  </div>
+  <RouterView />
 </template>

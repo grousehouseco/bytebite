@@ -12,6 +12,11 @@ export default {
     themes: ["emerald"],
   },
   theme: {
+    fontFamily: {
+      'bungee': ['Bungee'],
+      'rubik': ['Rubik'],
+      'tourney': ['Tourney']
+    },
     extend: {},
   },
   plugins: [
