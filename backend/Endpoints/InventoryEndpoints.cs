@@ -3,6 +3,7 @@ using digital_pantry.Models;
 using digital_pantry.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using YamlDotNet.Core.Events;
 
 namespace digital_pantry.Endpoints;
 

@@ -28,11 +28,13 @@ BsonClassMap.RegisterClassMap<User>();
 BsonClassMap.RegisterClassMap<Inventory>();
 BsonClassMap.RegisterClassMap<Household>();
 BsonClassMap.RegisterClassMap<Grocery>();
+BsonClassMap.RegisterClassMap<BasicGrocery>();
 builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection("Mongo"));
 builder.Services.AddSingleton<UserRepository>();
 builder.Services.AddSingleton<InventoryRepository>();
 builder.Services.AddSingleton<HouseholdRepository>();
 builder.Services.AddSingleton<GroceryRepository>();
+builder.Services.AddSingleton<BasicGroceryRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(config =>
 {

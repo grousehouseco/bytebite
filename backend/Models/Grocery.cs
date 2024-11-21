@@ -6,23 +6,9 @@ namespace digital_pantry.Models;
 
 public class Grocery
 {
-    /*
-     * code: string = '';
-       brands: string = '';
-       product_name: string = '';
-       product_quantity: number = 0;
-       product_quantity_unit: string = 'g';
-       categories_hierarchy: string[] = [];
-       image_thumb_url: string = '';
-       allergens_hierarchy: string[] = [];
-       serving_quantity: string = '';
-       serving_quantity_unit: string = '';
-       serving_size: string = '';
-       links: string[] = []; //holds a reference to the original search call
-     */
     [JsonPropertyName("id")]
     [BsonElement("id")]
-    public string? Id { get; set; } // UpcCode
+    public string? Id { get; set; } // UpcCode OR generic?
     [JsonPropertyName("brands")]
     [BsonElement("brands")]
     public string? Brands { get; set; }
