@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>digital_pantry</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>e2420916-14de-4ccd-a6f2-43f30e8f5e6e</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NSwag.AspNetCore" Version="14.1.0" />
+        <PackageReference Include="Sieve" Version="2.5.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GroceryLibrary\GroceryLibrary.csproj" />
+      <ProjectReference Include="..\UserLibrary\UserLibrary.csproj" />
+    </ItemGroup>
+
+</Project>
